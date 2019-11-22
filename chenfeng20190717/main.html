@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta name="format-detection" content="telephone=no" />
+    <!--轮播插件-->
+	<link rel="stylesheet" href="css/swiper.min.css">
+	<script src="js/swiper.min.js"></script>
+    <title>首页</title>
+    <!--本页面CSS↓-->
+    <link rel="stylesheet" href="css/style.css">
+	<link rel="stylesheet" type="text/css" href="css/font-awesome.min.css">
+	<link rel="stylesheet" type="text/css" href="css/audio.css">
+    <!--本页面JS-->
+    <script src="js/jquery.min.js"></script>
+    <script src="js/data.js"></script>
+    <script src="js/layer/layer.js" type="text/javascript"></script>
+</head>
+<body>
+	<section class="mp4_box">
+		<div class="head1"><img src="images/logo1.png"/></div>
+		<div class="indexcon">
+			<a href="javascript:void(0);" onclick="toMenu1('0')"><div class="indexon1"><img src="images/indeximg1.png"/></div></a>
+			<a href="javascript:void(0);" onclick="toMenu1('1')"><div class="indexon2"><img src="images/indeximg2.png"/></div></a>
+		</div>
+		<div class="footer1">www.chenfengedu.com</div>
+		<div class="mp4img1"><a href="javascript:void(0);" onclick="logout()"><img src="images/guanji.png"/></a></div>
+	</section>
+</body>
+<script>
+	$(function(){
+		//updateData();
+	})
+	function toMenu1(pid) {
+		var upcode = updateDataByDir(pid);
+		if(upcode == "200"){
+			setParam("dirNode", pid);
+			jump("menu1.html");
+		} else {
+			if(logoutcode[upcode]) {
+				layer.alert(errormap[upcode], function () { 
+                         jump("login.html"); 
+				})
+			} else {
+				layer.msg(errormap[upcode]);
+			}
+		}
+		
+	}
+
+</script>
+</html>

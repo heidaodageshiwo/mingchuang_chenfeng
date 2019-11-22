@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta name="format-detection" content="telephone=no" />
+	<script src="js/data.js"></script>
+    <!--轮播插件-->
+	<link rel="stylesheet" href="css/swiper.min.css">
+	<script src="js/swiper.min.js"></script>
+    <title>首页</title>
+    <!--本页面CSS↓-->
+    <link rel="stylesheet" href="css/style.css">
+	<link rel="stylesheet" type="text/css" href="css/font-awesome.min.css">
+	<link rel="stylesheet" type="text/css" href="css/audio.css">
+    <!--本页面JS-->
+	<script type="text/javascript" src="js/audio.js"></script>
+    <script src="js/jquery.min.js"></script>
+</head>
+<body>
+	<section class="abo_box">
+		<button onclick="get1()">获取电脑信息getMacInfo(),返回:'{"mac":"11111","sys":"22222"}' mac：电脑mac地址，sys:电脑操作系统描述</button> <div id="a1"></div>
+		<button onclick="get2()">设置参数   setParam(id,data) 如id="pid",data="23456"</button> <div id="a2"></div>
+		<button onclick="get3()">获取参数   getParam(id) 如id="pid"</button> <div id="a3"></div>
+		<button onclick="get4()">下载文件  downloadFiles(files) files是数组，如files=["http://pspjtoibz.bkt.clouddn.com/76963968a8de4b7ab13dbb053f04b470","http://pspjtoibz.bkt.clouddn.com/dbd5e02e410140ae923ba408ada1579c"]</button> <div id="a4"></div>
+		<button onclick="get5()">获取文件  getFile(id) 如id="76963968a8de4b7ab13dbb053f04b470"</button> <div id="a5"></div>
+		<button onclick="get6()">获取本地文件 </button> 文件路径：<input id="fileurl"> <div id="a5"></div>
+		<button onclick="get7()">播放视频 </button> <div id="a6"></div>
+		<button onclick="get8()">播放音频 </button> <div id="a7"></div>
+		<button onclick="get9()">播放PDF </button> <div id="a8"></div>
+
+		<span><button onclick="get10()">关闭音频 </button> <div id="a10"></div>
+
+			 1、获取电脑mac地址和操作系统描述<br>
+			 2、存取参数（格式：存参数：setParam(id,data),data为字符串，取参数：getParam(id)）,参数要固化，在跳转页面、重新打开客户端时仍能再次获取<br>
+			 3、下载文件（传入文件url列表，如[http://pspjtoibz.bkt.clouddn.com/76963968a8de4b7ab13dbb053f04b470,http://pspjtoibz.bkt.clouddn.com/dbd5e02e410140ae923ba408ada1579c],需要按url中最后的uuid作为文件名存储）<br>
+			 4、获取文件，根据3中的文件名
+		</span>
+	</section>
+</body>
+<script>
+	
+	function get1(){
+			$("#a1").html("");
+			var obj = window.external.getMacInfo();
+			var objjson = JSON.parse(obj);
+			var str = "mac:"+objjson.mac+"    sys:"+objjson.sys;
+			$("#a1").html(str);
+	}
+		function get2(){
+			$("#a2").html("");
+			var obj = window.external.setParam("pid","aaaa");
+			
+	}
+	function get3(){
+			$("#a3").html("");
+			var data = window.external.getParam("pid");
+			$("#a3").html(data);
+	}
+	
+	function get4(){
+			 window.external.downloadFiles(["http://pspjtoibz.bkt.clouddn.com/76963968a8de4b7ab13dbb053f04b470","http://pspjtoibz.bkt.clouddn.com/dbd5e02e410140ae923ba408ada1579c","http://pspjtoibz.bkt.clouddn.com/21009c6b0f7049569d944d5de86e8d2e","http://pspjtoibz.bkt.clouddn.com/191bd7576baf4e9b8546c247d993f000","http://pspjtoibz.bkt.clouddn.com/80c3fe8a27c1457b9258d1707db4c283","http://pspjtoibz.bkt.clouddn.com/d5ef531d311d4dbc8418e14ec4e07b57","http://pspjtoibz.bkt.clouddn.com/d794dfac20864884a52e6907738d007a"]);
+	}
+	function get5(){
+			$("#a5").html("");
+			var data = window.external.getFile("76963968a8de4b7ab13dbb053f04b470");
+			
+			$("#a5").html(data.length);
+	}
+	function get6(){
+		var file = $("#fileurl").val();
+		$.ajax({
+                        type: "get",
+                        url: file,
+                        dataType: "text",
+                        async: true
+                    }).done(function (data) {
+                        alert(data);
+                    });
+	}
+			function get7(){
+			 window.external.playVideo("视频测试","21009c6b0f7049569d944d5de86e8d2e");
+	}
+
+		function get8(){
+			 window.external.playMusic(["0,音频测试,191bd7576baf4e9b8546c247d993f000","1,音频测试2,80c3fe8a27c1457b9258d1707db4c283","0,音频测试3,d5ef531d311d4dbc8418e14ec4e07b57"]);
+	}
+		function get9(){
+			 window.external.playPDF("c65d0ddb831644f89fe7f9189e2373bf");
+	}
+
+	function get10(){
+		$("#a10").html(window.external.stopPlayMusic());
+		$("#a10").html(11111);
+	}
+</script>
+</html>

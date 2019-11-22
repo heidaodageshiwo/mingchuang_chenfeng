@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="format-detection" content="telephone=no" />
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <!--轮播插件-->
+	<link rel="stylesheet" href="css/swiper.min.css">
+	<script src="js/swiper.min.js"></script>
+    <title>首页</title>
+    <!--本页面CSS↓-->
+    <link rel="stylesheet" href="css/style.css">
+	<link rel="stylesheet" type="text/css" href="css/font-awesome.min.css">
+	<link rel="stylesheet" type="text/css" href="css/audio.css">
+    <!--本页面JS-->
+    <script src="js/jquery.min.js"></script>
+ 	<script src="js/data.js"></script>
+    <script src="js/layer/layer.js" type="text/javascript"></script>
+</head>
+<body>
+	<section class="abo_box">
+		<div class="aboutbox" style="padding-top: 80px;">
+			<div class="loginimg"><img src="images/logo.png"/></div>
+			<div class="logininput"><label><img id="img1" src="images/zhanghao.png"/></label><input id="zh" type="text" placeholder="账号" /><span id="rr1"></span></div>
+			<div class="logininput"><label><img src="images/mima.png"/></label><input id="mm" type="password" placeholder="密码" /></div>
+			<div class="" style="width: 610px;text-align: center;margin-bottom: 10px;color: red;"><span id="errorspan"></span></div>
+			<div class="logininputs"><button  style="cursor: pointer;" onclick="login()">登 录</button></div>
+		</div>
+	</section>
+	<image id="aa"/>
+
+</body>
+<script>
+	function login(){
+
+	    $("#errorspan").html("");
+		var zhvl = $("#zh").val();
+		var mmvl = $("#mm").val();
+		if(zhvl=="") {
+            $("#errorspan").html("请填写账号");
+            return;
+		}
+        if(mmvl=="") {
+            $("#errorspan").html("请填写密码");
+            return;
+        }
+		var macInfo = getMacInfo();
+        var deviceSign = macInfo.macaddress;
+		var deviceModel = macInfo.system;
+        $.ajax({
+            url: ctf+"/edu/login",
+            type: "get",
+            data: "username="+zhvl+"&password="+mmvl+"&deviceSign="+deviceSign+"&deviceModel="+deviceModel,
+            dataType:"json",
+            success: function (e) {
+                var code = e.code;
+                if(code == "200") {
+					var userToken = e.hashMap.user.token;
+					setParam("userToken", userToken);
+					if(updateDataByDir("0") == "1018" && updateDataByDir("1")=="1018") {
+						$("#errorspan").html(errormap["1018"]);
+					} else {
+						jump("main.html");
+					}
+					
+				} else {
+                    var msg = e.status;
+                    $("#errorspan").html(msg);
+				}
+            }
+        })
+
+
+	}
+		
+	$(function(){
+		var userToken = getParam("userToken");
+		var inw = isNetWorking();
+		var d = true;
+		//检测版本
+		if(inw) {
+			$.ajax({
+	            	url: ctf+"/edu/getWebSoft",
+	            	type: "get",
+	            	dataType:"json",
+	            	async: false,
+	            	success: function (e) {
+	                	var code = e.code;
+	                	if(code == "200") {
+							var webVersionCode = e.hashMap.webSoft.versionCode;
+							var locWebVersionCode = getParam("webVersionCode");
+							if(webVersionCode != locWebVersionCode) {
+									layer.confirm('有新版本更新，是否更新？',{btn: ['是', '否'],title:"提示"},function(){
+										if(d) {
+											d = false;
+											setParam("webVersionCode", webVersionCode);
+											window.external.updateWebSoft();
+											d = true;
+										}
+									    
+									 })
+							}
+
+						} 
+	            	}
+	        	})
+		}
+		if(userToken!=""){
+			if(inw) {
+				$.ajax({
+	            	url: ctf+"/api/dir/getUser",
+	            	type: "get",
+	            	data: "token="+userToken,
+	            	dataType:"json",
+	            	success: function (e) {
+	                	var code = e.code;
+	                	if(code == "200") {
+							var userToken = e.hashMap.user.token;
+							setParam("userToken", userToken);
+						} else {
+							
+							//layer.alert(e.status);
+						} 
+	            	}
+	        	})
+			} else {
+				jump("main.html");
+			}
+		} 
+	})
+</script>
+
+</html>
