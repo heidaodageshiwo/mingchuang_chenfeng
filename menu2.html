@@ -24,12 +24,17 @@
     </style>
 </head>
 <body style="overflow: hidden;">
-	<section class="cheng1_box">
+	<section class="chen_box">
 		<div class="chen2left"  id="mldiv">
-			
+			<!-- yzh修改 -->
+			<div class="yzh_logo_container">
+				<img class="yzh_logo" src="images/big_logo.png">
+				<div class="yzh_logo_shadow"></div>
+			</div>
+			<!-- yzh修改 -->
 		</div>
 		<div class="chen2right">
-			<h2><img src="images/biaoti.png"/><span id="mlnm"></span><a style="float: right;" href="javascript:void(0);" onclick="qiehuan()"><img id="qhimg" src="images/qiehuan.png"></img></a></h2>
+			<h2><img src="images/biaoti.png"/><span id="mlnm"></span><a style="float: right;" href="javascript:void(0);" onclick="qiehuan()"><img id="qhimg" src="images/qiehuan.png"></img></a><div class="yzh_edit">编辑</div><div class="yzh_all_selected">全选</div></h2>
 			<div class="rigdl rl"  id="mldiv1">
 				
 			</div>
@@ -40,7 +45,7 @@
 			</div>
 			<img src="images/xiajiantou.png" class="xiatou"/>
 		</div>
-		<div class="mp4img"><a href="javascript:void(0);"><img class="musicbutton" src="images/musicimg.png"/></a><a href="javascript:void(0);" onclick="down()"><img src="images/down.png"/></a><a href="javascript:void(0);"  onclick="goBack()"><img src="images/fenxiang.png"/></a><a href="javascript:void(0);" onclick="logout()"><img src="images/guanji.png"/></a>
+		<div class="mp4img"><a href="javascript:void(0);"><img src="images/del_btn.png"/></a><a href="javascript:void(0);"><img class="musicbutton" src="images/musicimg.png"/></a><a href="javascript:void(0);" onclick="down()"><img src="images/down.png"/></a><a href="javascript:void(0);"  onclick="goBack()"><img src="images/fenxiang.png"/></a><a href="javascript:void(0);" onclick="logout()"><img src="images/guanji.png"/></a>
 		</div>
 	</section>
 	<section class="mp4_box map1" id="imgDiv" style="display: none;position: absolute;">
@@ -129,6 +134,29 @@
 		}
 		$(function(){
 			
+			// yzh修改
+			$(".yzh_edit").click(function(){
+				$('.yzh_checkbox').toggle()
+				if($(this).text() == '编辑'){
+					$(this).text('取消')
+				}else{
+					$(".yzh_all_selected").text('全选')
+					$(this).text('编辑')
+				}
+			})
+			$(".yzh_all_selected").click(function(){
+				if($(".yzh_edit").text() == '取消'){					
+					if($(this).text() == '全选'){
+						$('.yzh_checkbox').addClass('selected');
+						$(this).text('取消')
+					}else{
+						$('.yzh_checkbox').removeClass('selected');
+						$(this).text('全选')
+					}
+				}				
+			})
+			// yzh修改
+
 			if($('.rigdl').children().length < 9){
 				$('.xiatou').hide();
 			}else{
@@ -248,10 +276,11 @@
 						}
                     	onerror = ' onerror=\'this.src="images/wenjianjiabig.png"\'';
                     } 
-                    htmlstr1 += '<dl>\n' +
+                    htmlstr1 += '<dl style="position: relative;">\n' +
                         '<a href="javascript:void(0);" onclick="showml(\'2\',\''+data.dirId+'\',\''+data.dirName+'\',\''+data.fileType+'\',\''+data.filePath+'\')">\n' +
                         '<dt><img src="'+icon+'" '+onerror+'/></dt>\n' +
                         '<dd>'+data.dirName+'</dd>\n' +
+                        '<label class="yzh_checkbox yzh_checkbox_model1"></label>'+
                         '</a>\n' +
                         '</dl>';
 
@@ -271,11 +300,21 @@
                     if(data.fileType=="4") {
                     	icon="images/pdf.png";
                     }
-                        
-                    htmlstr2 +='<li><a href="javascript:void(0);"  onclick="showml(\'2\',\''+data.dirId+'\',\''+data.dirName+'\',\''+data.fileType+'\',\''+data.filePath+'\')"><span><img src="'+icon+'"/></span>'+data.dirName+'</a></li>';
+                    
+                    // yzh修改 
+                    htmlstr2 +='<li><a href="javascript:void(0);"  onclick="showml(\'2\',\''+data.dirId+'\',\''+data.dirName+'\',\''+data.fileType+'\',\''+data.filePath+'\')"><label class="yzh_checkbox"></label><span><img src="'+icon+'"/></span>'+data.dirName+'</a></li>';
+                    // yzh修改
                 }
-               $("#mldiv1").append(htmlstr1);
-               $("#mlul2").append(htmlstr2);
+                $("#mldiv1").append(htmlstr1);
+                $("#mlul2").append(htmlstr2);
+
+                // yzh修改
+                $(".yzh_checkbox").click(function(){
+					event.stopPropagation()
+					$(this).toggleClass('selected');
+				})
+               // yzh修改
+
                qhshow()
             } else {//文件
 				if(filetype == "1") { //图片

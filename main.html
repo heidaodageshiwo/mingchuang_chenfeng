@@ -18,19 +18,36 @@
     <script src="js/layer/layer.js" type="text/javascript"></script>
 </head>
 <body>
-	<section class="mp4_box">
+	<section class="mp4_box yzh_mp4box" onclick="aa()">
 		<div class="head1"><img src="images/logo1.png"/></div>
-		<div class="indexcon">
-			<a href="javascript:void(0);" onclick="toMenu1('0')"><div class="indexon1"><img src="images/indeximg1.png"/></div></a>
-			<a href="javascript:void(0);" onclick="toMenu1('1')"><div class="indexon2"><img src="images/indeximg2.png"/></div></a>
+		<!-- yzh修改 -->
+		<div style="height: 30px;"></div>
+		<div class="indexcon yzh_indexcon">
+			<a href="javascript:void(0);" onclick="toMenu1('0')"><div class="indexon"><img src="images/indexbg1.png"/></div></a>
+			<a href="javascript:void(0);" onclick="toMenu1('1')"><div class="indexon"><img src="images/indexbg2.png"/></div></a>
+			<a href="javascript:void(0);" onclick="toMenu1('1')"><div class="indexon"><img src="images/indexbg2.png"/></div></a>
+			<a href="javascript:void(0);" onclick="toMenu1('0')"><div class="indexon"><img src="images/indexbg1.png"/></div></a>
+			<a href="javascript:void(0);" onclick="toMenu1('1')"><div class="indexon"><img src="images/indexbg2.png"/></div></a>
+			<a href="javascript:void(0);" onclick="toMenu1('0')"><div class="indexon"><img src="images/indexbg1.png"/></div></a>
+			<a href="javascript:void(0);" onclick="toMenu1('1')"><div class="indexon"><img src="images/indexbg2.png"/></div></a>
+			<a href="javascript:void(0);" onclick="toMenu1('1')"><div class="indexon"><img src="images/indexbg2.png"/></div></a>
+			<a href="javascript:void(0);" onclick="toMenu1('0')"><div class="indexon"><img src="images/indexbg1.png"/></div></a>
+			<a href="javascript:void(0);" onclick="toMenu1('1')"><div class="indexon"><img src="images/indexbg2.png"/></div></a>
 		</div>
+		<!-- yzh修改 -->
 		<div class="footer1">www.chenfengedu.com</div>
-		<div class="mp4img1"><a href="javascript:void(0);" onclick="logout()"><img src="images/guanji.png"/></a></div>
+		<!-- yzh修改 -->
+		<div class="mp4img1 yzh_mp4img1"><a href="javascript:void(0);" onclick="logout()"><img src="images/guanji.png"/></a></div>
+		<!-- yzh修改 -->
 	</section>
 </body>
 <script>
+
+	function aa(){
+		// window.location.href = "aa.html";
+	}
 	$(function(){
-		//updateData();
+		
 	})
 	function toMenu1(pid) {
 		var upcode = updateDataByDir(pid);

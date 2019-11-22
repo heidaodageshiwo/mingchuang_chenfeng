@@ -1,0 +1,216 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta name="format-detection" content="telephone=no" />
+    <!--轮播插件-->
+	<!-- <link rel="stylesheet" href="css/swiper.min.css">
+	<script src="js/swiper.min.js"></script> -->
+    <title>首页</title>
+    <!--本页面CSS↓-->
+    <link rel="stylesheet" href="css/style.css">
+	<link rel="stylesheet" type="text/css" href="css/font-awesome.min.css">
+	<link rel="stylesheet" type="text/css" href="css/audio.css">
+    <!--本页面JS-->
+    <script src="js/jquery.min.js"></script>
+    <!-- <script src="js/data.js"></script> -->
+    <!-- <script src="js/layer/layer.js" type="text/javascript"></script> -->
+</head>
+<body>
+	<audio id="myAudio"></audio>
+	<div class="yzh_audio_box">
+		<div class="yzh_container">
+			<div class="yzh_audio_wrapper">
+				<div class="yzh_audio_header">科技范斯科拉的积分</div>
+				<div class="yzh_line"></div>
+				<div class="yzh_audio_container">				
+					<div class="audio_progress">
+						<div class="audio_time play_time">00:00</div>
+						<div class="audio_loaded_line"></div>						
+						<div class="audio_play_line"></div>
+						<div class="audio_loaded_btn" id="audio_loaded_btn"></div>
+						<div class="audio_time all_time">00:00</div>
+					</div>					
+				</div>
+				<div class="yzh_audio_controls">					
+					<div class="play_control">
+						<div class="prev_control"><img src="images/audio_controls/prev.png"></div>
+						<div class="play" style="display: block;"><img src="images/audio_controls/play.png"></div>
+						<div class="pause"><img src="images/audio_controls/pause.png"></div>
+						<div class="play_model"><img src="images/audio_controls/danqu.png" data-index="1" style="display: block;"><img src="images/audio_controls/danquLoop.png" data-index="2"><img src="images/audio_controls/listLoop.png" data-index="3"></div>
+						<div class="next_control"><img src="images/audio_controls/next.png"></div>
+					</div>					
+				</div>
+			</div>
+		</div>
+	</div>
+</body>
+<script type="text/javascript">
+	function timeDeal(num){
+		let time = parseInt(num);
+		let minute = parseInt(time / 60);
+		let second = time % 60;
+		let minuteText = minute < 10 ? '0' + minute : minute;
+		let secondText = second < 10 ? '0' + second : second;
+		return minuteText + ':' + secondText
+	}
+</script>
+<script type="text/javascript">
+	$(function(){
+
+		var audioIndex = 2;
+		var audioArray = ['images/audios/1.mp3','images/audios/2.mp3','images/audios/3.mp3','images/audios/4.mp3']
+
+
+		var myAudio = document.getElementById('myAudio');
+		var duration;
+
+		myAudio.src = audioArray[audioIndex];
+		myAudio.oncanplaythrough = function(){
+			myAudio.onprogress = function(){
+				console.log(myAudio.buffered.end(0))
+				let loadedtime = myAudio.buffered.end(0);
+				duration = myAudio.duration;
+				console.log(duration)
+				$('.all_time').text(timeDeal(duration))
+				let aa = parseInt(loadedtime)
+				let bb = parseInt(duration)
+				console.log(aa/bb)
+				$('.audio_loaded_line').css('width',aa / bb * 100 + '%');
+			}
+		}
+		
+		myAudio.ontimeupdate = function(){
+			// console.log(myAudio.currentTime)
+			$('.play_time').text(timeDeal(myAudio.currentTime))
+			let aa = parseInt(myAudio.currentTime);
+			let bb = parseInt(duration)
+			let cc;
+			if(aa / bb >= 1){
+				cc = 'calc(100% - 20px)'
+			}else{
+				cc = aa / bb * 100 + '%'
+			}
+			$(".audio_play_line").css('width', aa / bb * 100 + '%');
+			$(".audio_loaded_btn").css('left', cc);
+		}
+
+		myAudio.onended = function(){
+			console.log('end');
+			if(model == 0){
+				$('.play').show()
+				$('.pause').hide()
+			}
+			if(model == 1){
+				myAudio.play()
+			}
+			if(model == 2){
+				if(audioIndex == audioArray.length - 1){
+					audioIndex = 0;						
+				}else{
+					audioIndex++;
+				}
+				myAudio.src = audioArray[audioIndex];
+				$('.play').show()
+				$('.pause').hide()
+			}
+		}
+
+		myAudio.onseeked = function(){
+			console.log(11)
+		}
+
+		$(".play").click(function(){
+			myAudio.play()
+			$(this).hide()
+			$('.pause').show()
+		})
+
+		$('.pause').click(function(){
+			myAudio.pause();
+			$(this).hide()
+			$('.play').show()
+		})
+
+		$(".prev_control").click(function(){
+			if(model == 2){
+				if(audioIndex == 0){
+					audioIndex = audioArray.length - 1;
+					myAudio.src = audioArray[audioIndex];
+				}else{
+					audioIndex--;
+					myAudio.src = audioArray[audioIndex];						
+				}
+				$('.play').show()
+				$('.pause').hide()
+			}
+		})
+
+		$(".next_control").click(function(){
+			if(model == 2){
+				if(audioIndex == audioArray.length - 1){
+					audioIndex = 0;
+					myAudio.src = audioArray[audioIndex];
+				}else{
+					audioIndex++;
+					myAudio.src = audioArray[audioIndex];
+				}
+				$('.play').show()
+				$('.pause').hide()
+			}
+		})
+
+		$(".yzh_audio_controls").css('height',$('.play_control').height() + 'px');
+		var model = 0;
+		$(".play_model img").on('click',function(){
+			var index = $(this).attr("data-index");
+			$(".play_model img").eq(index % 3).show().siblings().hide();
+			model = index % 3;
+		})
+		var btnLeft;
+		var sl;
+		var ml;
+		var drag_btn = document.getElementById("audio_loaded_btn")
+		// 不能用jq来编辑鼠标事件，会对audio的api有影响，mouseup设置currentTime不起作用
+		drag_btn.addEventListener('mousedown',function(e){
+			btnLeft = $('.audio_loaded_btn').css('left').split('px')[0];
+			sl = e.clientX - btnLeft;
+			document.addEventListener( 'mousemove', dragmove, false );
+	        document.addEventListener( 'mouseup', dragup, false );
+		},false)
+		function dragmove(e){
+			ml = e.clientX - sl;
+			if(ml < 0){
+				$('.audio_loaded_btn').css('left','0px')
+			}else{
+				if(ml > $(".audio_progress").width() - 20){
+					$('.audio_play_line').css('width',$(".audio_progress").width() + 'px');
+					$('.audio_loaded_btn').css('left',$(".audio_progress").width() - 20 + 'px')
+				}else{
+					$('.audio_play_line').css('width',ml + 'px');
+					$('.audio_loaded_btn').css('left',ml + 'px')
+				}
+			}
+		}
+		function dragup(){
+			document.removeEventListener( 'mousemove', dragmove );
+	        document.removeEventListener( 'mouseup', dragup );
+        	let aa = ml;
+			let bb = $(".audio_progress").width();
+			let dragduration;
+			console.log(aa,bb)
+			// if else 里设置currentTime也不起作用
+			if(aa / bb > 1){
+				dragduration = duration
+			}else{
+				aa = parseInt(aa);
+				bb = parseInt(bb);
+				dragduration = parseInt(aa / bb * duration)
+			}
+			myAudio.currentTime = dragduration
+		}
+		
+	})
+</script>
+</html>

@@ -1,5 +1,5 @@
-// var hosturl = "http://pad.chenfengedu.com/nursery";
-var hosturl = "http://47.94.99.209:8068/nursery";
+var hosturl = "http://pad.chenfengedu.com/nursery";
+hosturl = 'http://47.94.99.209:8068/nursery';
 //var hosturl = "http://localhost:8080/nursery";
 var ctf = hosturl + "/f";
 
