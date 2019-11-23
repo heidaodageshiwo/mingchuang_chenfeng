@@ -1,0 +1,576 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta name="format-detection" content="telephone=no" />
+    <!--轮播插件-->
+	<link rel="stylesheet" href="css/swiper.min.css">
+	<script src="js/swiper.min.js"></script>
+    <title>首页</title>
+    <!--本页面CSS↓-->
+    <link rel="stylesheet" href="css/style.css">
+	<link rel="stylesheet" type="text/css" href="css/font-awesome.min.css">
+	<link rel="stylesheet" type="text/css" href="css/audio.css">
+    <!--本页面JS-->
+    <script src="js/jquery.min.js"></script>
+    <script src="js/data.js"></script>
+    <script src="js/layer/layer.js" type="text/javascript"></script>
+    <style type="text/css">
+    	.banner2 .swiper-slide img{
+    		width: 100%;
+    		height: 100%;
+    	}
+    </style>
+</head>
+<body style="overflow: hidden;">
+	<section class="chen_box">
+		<div class="chen2left"  id="mldiv">
+			<!-- yzh修改 -->
+			<div class="yzh_logo_container">
+				<img class="yzh_logo" src="images/big_logo.png">
+				<div class="yzh_logo_shadow"></div>
+			</div>
+			<!-- yzh修改 -->
+		</div>
+		<div class="chen2right">
+			<h2><img src="images/biaoti.png"/><span id="mlnm"></span><a style="float: right;" href="javascript:void(0);" onclick="qiehuan()"><img id="qhimg" src="images/qiehuan.png"></img></a><div class="yzh_edit">编辑</div><div class="yzh_all_selected">全选</div></h2>
+			<div class="rigdl rl"  id="mldiv1">
+				
+			</div>
+			<div class="liebiao rl"  id="mldiv2" style="display:none;">
+				<ul id="mlul2">
+					
+				</ul>
+			</div>
+			<img src="images/xiajiantou.png" class="xiatou"/>
+		</div>
+		<div class="mp4img"><a href="javascript:void(0);"><img src="images/del_btn.png"/></a><a href="javascript:void(0);"><img class="musicbutton" src="images/musicimg.png"/></a><a href="javascript:void(0);" onclick="down()"><img src="images/down.png"/></a><a href="javascript:void(0);"  onclick="goBack()"><img src="images/fenxiang.png"/></a><a href="javascript:void(0);" onclick="logout()"><img src="images/guanji.png"/></a>
+		</div>
+	</section>
+	<section class="mp4_box map1" id="imgDiv" style="display: none;position: absolute;">
+		<div class="swiper-container banner1" id="gallery">
+			<div class="swiper-wrapper"  id="imgzsdiv">
+				
+			</div>
+		</div>
+		<div class="swiper-container banner2" id="thumbs">
+			<div class="swiper-wrapper" id="imgsldiv">
+				
+			</div>
+		</div>
+		<div class="mp4img"><a href="javascript:void(0);"><img class="musicbutton" src="images/musicimg.png"/></a><a onclick="closeImg()"  href="javascript:void(0);"><img src="images/fenxiang.png"/></a></div>
+	</section>
+	<section class="mp4_box" id="pdfDiv" style="display: none;position: absolute;">
+		<h2 id="pdfname"></h2>
+		<div class="pdfbox">
+			<iframe id="pdfiframe" src="" width="1800px" height="768px"></iframe>
+		</div>
+		<div class="mp4img"><a href="javascript:void(0);"><img class="musicbutton" src="images/musicimg.png"/></a><a onclick="closePdf()" href="javascript:void(0);"><img src="images/fenxiang.png"/></a><a onclick="closePdf()" href="javascript:void(0);"><img src="images/guanji.png"/></a></div>
+	</section>
+	<section class="mp4_box"  id="mp4Div" style="display: none;position: absolute;">
+		<h2 id="mp4name"></h2>
+		<video controls="controls" src="" id="mp4video">
+		</video>
+		<div class="mp4img"><a href="javascript:void(0);"><img class="musicbutton" src="images/musicimg.png"/></a><a onclick="closeMp4()" href="javascript:void(0);"><img src="images/fenxiang.png"/></a><a onclick="closeMp4()" href="javascript:void(0);"><img src="images/guanji.png"/></a></div>
+	</section>
+
+	<section class="mp3_box" id="mp3Div" style="display: none;position: absolute;">
+		<div class="kemp3">
+			<div class="audio-box">
+		<div class="audio-container">
+
+			<div class="audio-view">
+				<div class="audio-cover"></div>
+				<div class="audio-body">
+					<h3 class="audio-title" id="mp3Name"></h3>
+					<div class="audio-backs">
+						<div class="audio-this-time">00:00</div>
+						<div class="audio-count-time">00:00</div>
+						<div class="audio-setbacks">
+							<i class="audio-this-setbacks">
+								<span class="audio-backs-btn"></span>
+							</i>
+							<span class="audio-cache-setbacks">
+							</span>
+						</div>
+					</div>
+				</div>
+				<div class="audio-btn">
+					<div class="audio-select">
+						<div action="prev" class="icon-fast-backward"></div>
+						<div action="play" data-on="icon-play" data-off="icon-pause" class="icon-play"></div>
+						<div action="next" class="icon-fast-forward"></div>
+						<!--<div action="menu" class="icon-list-alt"></div>-->
+						<div action="volume" class="icon-volume-up">
+							<div class="audio-set-volume">
+								<div class="volume-box">
+									<i><span  class="audio-backs-btn"></span></i>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+			<div class="mp4img"><a href="javascript:void(0);"><img class="musicbutton" src="images/musicimg.png"/></a><a href="javascript:void(0);" onclick="closeMp3()"><img src="images/fenxiang.png"/></a><a href="javascript:void(0);" onclick="closeMp31()"><img src="images/guanji.png"/></a></div>
+		</div>
+	</div>
+		</div>
+	</section>
+	<script type="text/javascript">
+		var dirObjs = null;
+		var showDatas = null;
+		var audioFn = null
+		var historys = [];
+		var menu2id = getParam("menu2id");
+
+		var menu2name = getParam("menu2name");
+		var dirNode = getParam("dirNode");
+		var dirList = getParam("dirList"+dirNode);
+		var mlid = "";
+		var qhid = getParam("qhid");
+		if(!qhid) {
+			qhid = "1";
+		}
+		$(function(){
+			
+			// yzh修改
+			$(".yzh_edit").click(function(){
+				$('.yzh_checkbox').toggle()
+				if($(this).text() == '编辑'){
+					$(this).text('取消')
+				}else{
+					$(".yzh_all_selected").text('全选')
+					$(this).text('编辑')
+				}
+			})
+			$(".yzh_all_selected").click(function(){
+				if($(".yzh_edit").text() == '取消'){					
+					if($(this).text() == '全选'){
+						$('.yzh_checkbox').addClass('selected');
+						$(this).text('取消')
+					}else{
+						$('.yzh_checkbox').removeClass('selected');
+						$(this).text('全选')
+					}
+				}				
+			})
+			// yzh修改
+
+			if($('.rigdl').children().length < 9){
+				$('.xiatou').hide();
+			}else{
+				$('.xiatou').show();
+			}
+
+			dirObjs = JSON.parse(dirList);
+			var menus = dirObjs["0"];
+
+			var menuHtmlStr = "";
+            for(var i=0;i<menus.length&&i<8;i++){
+                var data = menus[i];
+                var id = data.dirId;
+                var classStr = "";
+                if(id == menu2id) {
+                    // layer.msg("id:"+id+",dirname:"+data.dirName);
+                	showml(1,id, data.dirName,"0");
+                	classStr = "checked";
+                }
+                menuHtmlStr += '<dl id="'+data.dirId+'dl" class="'+classStr+'">\n' +
+                                '<a href="javascript:void(0);" onclick="showml(\'1\',\''+data.dirId+'\',\''+data.dirName+'\',\''+data.fileType+'\',\''+data.filePath+'\')">\n' +
+                                '<dt><img src="images/chenimg'+(i+1)+'.png"/></dt>\n' +
+                                '<dd>'+data.dirName+'</dd>\n' +
+                                '</a>\n' +
+                                '</dl>';
+            }
+            $("#mldiv").append(menuHtmlStr);
+            $(".musicbutton").click(function(){
+            	//if($("#mp3Div").is(':visible')){
+				//	$("#mp3Div").hide();
+            	//} else {
+            	//	$("#mp3Div").show();
+            	//}
+            	musicPlay(dirNode);
+            })
+    })
+    
+	var ssindex=null;
+	var ssid=null;
+	var ssname=null;
+	
+	var showflag = true;
+    function showml(index, id, name, filetype, filepath){
+		if(showflag){
+			showflag = false;
+		} else {
+			return;
+		}
+			var upcode = updateDataByDir(dirNode);
+			if(upcode != "200"){
+				if(logoutcode[upcode]) {
+					layer.alert(errormap[upcode], function () { 
+							 toLogin();
+					})
+				} else {
+					if("1018" == upcode) {
+						layer.alert(errormap[upcode], function () { 
+							 toLogin();
+					})
+					} else {
+						layer.msg(errormap[upcode]);
+					}
+					
+				}
+				showflag = true;
+				return;	
+			}
+		
+			dirList = getParam("dirList"+dirNode);
+			dirObjs = JSON.parse(dirList);
+		    if(filetype == "0") { //文件夹
+				
+				ssindex=index;
+				ssid=id;
+				ssname=name;
+		    	$("#mldiv1").html("");
+		    	$("#mlul2").html("");
+		    	mlid = id;
+                if(index == 1){
+                    historys = [];
+                    var obj={"id":id,"name":name};
+                    historys.push(obj);
+                    $("dl.checked").removeClass("checked");
+                    $("#"+id+"dl").addClass("checked");
+                } else {
+                    var temphistory = [];
+                    for(var i=0;i<historys.length;i++){
+                        var obj = historys[i];
+                        if(id != obj.id) {
+                            temphistory.push(obj);
+                        } else {
+                            break;
+                        }
+                    }
+                    var obj={"id":id,"name":name};
+                    temphistory.push(obj);
+                    historys = temphistory;
+                }
+                showhistory();
+
+                var htmlstr1 = "";
+                var htmlstr2 = "";
+                showDatas = dirObjs[id];
+                if(!showDatas) {
+                	showDatas = [];
+                }
+                for(var i=0;i<showDatas.length;i++){
+                    var data = showDatas[i];
+                    var icon = data.dirIcon;
+					var onerror = '';
+                    if(data.fileType=="3") {
+                    	icon="images/music.png";
+                    } else if(data.fileType=="4") {
+                    	icon="images/pdf1.png";
+                    } else if(data.fileType=="0") {
+						if(!icon) {
+							icon = "images/wenjianjiabig.png";
+						}
+                    	onerror = ' onerror=\'this.src="images/wenjianjiabig.png"\'';
+                    } 
+                    htmlstr1 += '<dl style="position: relative;">\n' +
+                        '<a href="javascript:void(0);" onclick="showml(\'2\',\''+data.dirId+'\',\''+data.dirName+'\',\''+data.fileType+'\',\''+data.filePath+'\')">\n' +
+                        '<dt><img src="'+icon+'" '+onerror+'/></dt>\n' +
+                        '<dd>'+data.dirName+'</dd>\n' +
+                        '<label class="yzh_checkbox yzh_checkbox_model1"></label>'+
+                        '</a>\n' +
+                        '</dl>';
+
+                    var icon2 = "";
+                    if(data.fileType=="0") {
+                    	icon="images/wenjianjia.png";
+                    }
+                    if(data.fileType=="1") {
+                    	icon="images/jpg.png";
+                    }
+                    if(data.fileType=="2") {
+                    	icon="images/mp4Type.png";
+                    }
+                    if(data.fileType=="3") {
+                    	icon="images/mp3.png";
+                    }    
+                    if(data.fileType=="4") {
+                    	icon="images/pdf.png";
+                    }
+                    
+                    // yzh修改 
+                    htmlstr2 +='<li><a href="javascript:void(0);"  onclick="showml(\'2\',\''+data.dirId+'\',\''+data.dirName+'\',\''+data.fileType+'\',\''+data.filePath+'\')"><label class="yzh_checkbox"></label><span><img src="'+icon+'"/></span>'+data.dirName+'</a></li>';
+                    // yzh修改
+                }
+                $("#mldiv1").append(htmlstr1);
+                $("#mlul2").append(htmlstr2);
+
+                // yzh修改
+                $(".yzh_checkbox").click(function(){
+					event.stopPropagation()
+					$(this).toggleClass('selected');
+				})
+               // yzh修改
+
+               qhshow()
+            } else {//文件
+				if(filetype == "1") { //图片
+					$("#imgzsdiv").html("");
+					$("#imgsldiv").html("");
+					var imgs = [];
+					for(var i=0;i<showDatas.length;i++) {
+						var obj = showDatas[i];
+						var objfiletype = obj.fileType;
+						if(objfiletype == "1") {
+							if(obj.dirId == id) {
+								obj["cur"] = "1";
+							}
+							imgs.push(obj);
+						}
+
+					}
+
+					var downloadfiles = getNeedDownFiles(imgs);
+					if(downloadfiles.length > 0) {
+
+						downloadFiles1(downloadfiles);
+						//return;
+					}
+
+					var index = 0;
+					for(var i=0;i<imgs.length;i++){
+						var obj = imgs[i];
+						var fileid = obj.filePath.substring(obj.filePath.lastIndexOf("/")+1);
+						var filedata = getFileDataBase64(fileid);
+						$("#imgzsdiv").append('<div class="swiper-slide"><img src="'+filedata+'" class="bannerimg"/></div>');
+						$("#imgsldiv").append('<div class="swiper-slide"><img src="'+obj.dirIcon+'"/></div>');
+						if(obj.cur) {
+							index = i;
+						}
+					}
+
+					$("#imgDiv").show();
+					renderImg(index);
+				} else if(filetype == "2") { //视频
+					
+					var nodes = [{"filePath":filepath,"dirName":name}];
+					var downloadfiles = getNeedDownFiles(nodes);
+					
+					if(downloadfiles.length > 0) {
+						downloadFiles1(downloadfiles);
+						//return;
+					}
+					var fileid = filepath.substring(filepath.lastIndexOf("/")+1);
+					
+					window.external.playVideo(name,fileid);
+					
+
+                } else if(filetype == "3") { //音频
+                	//$("#mp3Div").show();
+                	var audios = [];
+                	var index = 0;
+                	var indextemp = 0;
+                	var audios1 = [];
+					for(var i=0;i<showDatas.length;i++) {
+						var obj = showDatas[i];
+						var objfiletype = obj.fileType;
+						var curo = "0";
+						if(objfiletype == "3") {
+							if(obj.dirId == id) {
+								curo = "1";
+							}
+							var fileid =  obj.filePath.substring(obj.filePath.lastIndexOf("/")+1);
+							audios.push(curo+","+obj.dirName+","+fileid);
+							audios1.push(obj);
+							filedata = undefined;
+							indextemp++;
+						}
+					}
+					var downloadfiles = getNeedDownFiles(audios1);
+					
+					if(downloadfiles.length > 0) {
+						downloadFiles1(downloadfiles);
+						//return;
+					}
+					
+					changeMusicBtn(1);
+					window.external.playMusic(audios);
+
+                } else if(filetype == "4") { //文档
+                	var nodes = [{"filePath":filepath,"dirName":name}];
+					var downloadfiles = getNeedDownFiles(nodes);
+					if(downloadfiles.length > 0) {
+						downloadFiles1(downloadfiles);
+						//return;
+					}
+					var fileid = filepath.substring(filepath.lastIndexOf("/")+1);
+                	window.external.playPDF(fileid);
+                }
+			}
+			showflag = true;
+		}   
+
+		function goBack(){
+			if(historys.length==1){
+			    jump("menu1.html");
+			} else {
+				var obj = historys[historys.length-2];
+				var index = "2";
+				if(historys.length==2) {
+				    index = "1";
+				}
+                showml(index,obj.id,obj.name,"0");
+			}
+		}   
+
+		function showhistory(){
+		    var mlstr = "";
+           for(var i=0;i<historys.length;i++) {
+				var index = "2";
+				if(i==0) {
+				    index = "1";
+				}
+				var obj = historys[i];
+				mlstr += '<a href="javascript:void(0);" onclick="showml(\''+index+'\', \''+obj.id+'\', \''+obj.name+'\',\'0\')">'+obj.name+'</a>>';
+		   }
+		   if(mlstr) {
+               mlstr = mlstr.substring(0, mlstr.length-1);
+		   }
+		   $("#mlnm").html(mlstr);
+		}
+
+		function closeImg(){
+			$("#imgDiv").hide();
+			$("#mp4video").attr("src", "");
+		}
+
+		function closePdf(){
+			$("#pdfDiv").hide();
+		}
+
+		function closeMp3(){
+			$("#mp3Div").hide();
+		}
+
+		function closeMp31(){
+			audioFn.close();
+			changeMusicBtn(0);
+			closeMp3();	
+		}
+
+		function closeMp4(){
+			$("#mp4Div").hide();
+			$("#mp4video").attr("src", "");
+		}
+
+		function renderImg(index){
+				$('.fangda').click(function(){
+					$(this).parent().parent().parent().addClass('fabig');
+					$('.fangda').hide();
+					$('.suoxiao').show();
+				});
+				$('.suoxiao').click(function(){
+					$(this).parent().parent().parent().removeClass('fabig');
+					$('.suoxiao').hide();
+					$('.fangda').show();
+				})
+				var thumbsSwiper = new Swiper('#thumbs',{
+					  spaceBetween: 10,
+					  slidesPerView: 5,
+					  direction : 'vertical',
+					  watchSlidesVisibility: true,//防止不可点击
+					  loop: false
+				})
+				var gallerySwiper = new Swiper('#gallery',{
+					  spaceBetween: 10,
+					  direction : 'vertical',
+					  initialSlide :index,
+					  thumbs: {
+					    swiper: thumbsSwiper,
+					  },
+					  on:{
+					  	imagesReady: function(){
+					      $(".bannerimg").each(function(){
+					      		var obj = $(this);
+					      		var width = obj.width();
+					       		var height = obj.height();
+					       		//$("#rr").append(width+"-"+height+"、");
+					      		var rate = 1510/945;
+					      		var rate1 = width/height;
+					      		if(rate > rate1) {
+					      			height = 945;
+					      			width = rate1 * 945;
+					      		} else {
+					      			width = 1510;
+					      			height = 1510/rate1;
+					      		}
+					      		$(this).width(width);
+					      		$(this).height(height);
+
+					      })
+					    }
+					  }
+				})
+
+		}
+
+		//$("#rr").append(dirList);
+		var alldile = [];
+		var downflag = true;
+		function down(){
+			if(downflag) {
+				downflag = false;
+				showml(ssindex, ssid, ssname, "0");
+				dirList = getParam("dirList"+dirNode);
+				dirObjs = JSON.parse(dirList);
+				alldile = [];
+				findFiles(mlid);
+			
+				//$("#rr").append(alldile.length);
+				var downloadfiles = getNeedDownFiles(alldile);
+				if(downloadfiles.length > 0) {
+					downloadFiles1(downloadfiles);
+				} else {
+					layer.msg("文件已全部下载");
+				}
+				downflag = true;
+			}
+		}
+
+		function findFiles(pid){
+			var objs = dirObjs[pid];
+			if(objs) {
+				for(var i=0;i<objs.length;i++) {
+					var obj = objs[i];
+					if(obj.fileType != "0") {
+						alldile.push(obj);
+					} else {
+						findFiles(obj.dirId);
+					}
+				}
+			}
+			
+		}
+
+		function qiehuan(){
+			if(qhid == "1") {
+				qhid = "2";
+			} else {
+				qhid = "1";
+			}
+			setParam("qhid",qhid);
+			qhshow();
+		}
+
+		function qhshow(){
+			$(".rl").hide();
+			$("#mldiv" + qhid).show();
+			$("#qhimg").attr("src","images/qiehuan"+qhid+".png")
+		}
+	</script>
+</body>
+</html>
