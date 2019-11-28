@@ -409,4 +409,23 @@ border-radius:41px; border: none; outline: none; line-height: 82px; color: #fff;
   margin-right: 28px;
   cursor: pointer;
 }
+/*下载相关修改*/
+.liebiao li a{
+  position: relative;
+}
+.downloadtext{
+  position: absolute;
+  right: 0;
+}
+.downloadtext_model1{
+  left: 10px;
+  top: 10px;
+  width: 70px;
+  height: 30px;
+  color: #ffffff;
+  text-align: center;
+  line-height: 30px;
+  background: rgba(0,0,0,0.5);
+  border-radius: 15px;
+}
 /*yzh新增样式*/

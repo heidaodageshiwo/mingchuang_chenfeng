@@ -56,12 +56,32 @@
                 if(code == "200") {
 					var userToken = e.hashMap.user.token;
 					setParam("userToken", userToken);
-					if(updateDataByDir("0") == "1018" && updateDataByDir("1")=="1018") {
-						$("#errorspan").html(errormap["1018"]);
-					} else {
-						jump("main.html");
-					}
-					
+					setParam("userName",e.hashMap.user.loginName);
+					setParam("userDate",e.hashMap.user.endDate);
+					setParam("schoolName",e.hashMap.user.campusName);
+					// yzh 2019-11-25
+					// if(updateDataByDir("0") == "1018" && updateDataByDir("1")=="1018") {
+					// 	$("#errorspan").html(errormap["1018"]);
+					// } else {
+					// 	jump("main.html");
+					// }
+					$.ajax({
+		            	url: ctf+"/api/dir/getUser",
+		            	type: "get",
+		            	data: "token="+userToken,
+		            	dataType:"json",
+		            	success: function (e) {
+		                	var code = e.code;
+		                	if(code == "200") {
+								setParam('authority',e.hashMap.user.directoryper)
+								jump("main.html");
+							} else {
+								
+								//layer.alert(e.status);
+							} 
+		            	}
+		        	})
+		        	// yzh 2019-11-25
 				} else {
                     var msg = e.status;
                     $("#errorspan").html(msg);

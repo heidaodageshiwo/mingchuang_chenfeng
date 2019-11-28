@@ -16,18 +16,40 @@
 	<script type="text/javascript" src="js/audio.js"></script>
     <script src="js/jquery.min.js"></script>
     <script src="js/data.js"></script>
+    <style type="text/css">
+		.yzh_loginmsg{
+			height: 80px;
+			border-bottom: 1px solid #cccccc;
+		}
+		#yzh_user{
+			float: left;
+			font-size: 18px;
+			color: #777777;
+			margin-top: 30px;
+			margin-left: 50px;
+		}
+		#yzh_date{
+			float: right;
+			font-size: 18px;
+			color: #777777;
+			margin-top: 30px;
+			margin-right: 50px;
+		}
+    </style>
 </head>
 <body>
 	<section class="abo_box">
 		<div class="head1"><img id="logoimg"  src="images/logo1.png"/></div>
-		<div class="aboutbox">
+		<div class="yzh_loginmsg"><div id="yzh_user">账号名称：tian</div><div id="yzh_date">到期日期：2020年</div></div>
+		<div class="aboutbox" style="padding-top: 60px;">
+			
 			<h2>用最好的教育，教育中国的未来</h2>
 			<div class="aboutcon">北京晨风教育集团是一家集国际幼儿园、双语幼儿园、国学幼儿园、国际早教、国际托教、艺术教育、营地学习为一体，全面覆盖0-6岁学龄前儿童教育的跨国教育集团。 与美国International Preschool of Raleigh、美国Kinderdance等多个国际幼教机构联合研发幼儿学前教育课程体系，拥有罗利国际幼儿园、晨风幼儿园和金睿家国际婴幼托教等多个高端国际教育品牌。</div>
-			<div class="zire"><img src="images/iphone.png"/>咨询热线:400-660-0825</div>
+			<div class="zire" style="text-align: center;"><!-- <img src="images/iphone.png"/> -->咨询热线:400-660-0825</div>
 			<div class="copb" id="bbh"></div>
 		</div>
-		<div class="footer1">www.chenfengedu.com</div>
-		<div class="mp4img1"><a href="javascript:void(0);" onclick="fh()"><img src="images/fenxiang.png"/></a></div>
+		<div class="footer1" id="yzh_aboutfooter">www.chenfengedu.com</div>
+		<div class="mp4img1"><a href="javascript:void(0);" onclick="logout()"><img src="images/guanji.png"/></a><a href="javascript:void(0);" onclick="fh()"><img src="images/fenxiang.png"/></a></div>
 	</section>
 </body>
 <script>
@@ -43,11 +65,14 @@
 			if(dirNode=="1") {
 				$("#logoimg").attr("src","images/logo2.png");
 			}
+			$("#yzh_user").html("账号名称：" + getParam("userName"))
+			$("#yzh_date").html("到期日期：" + getParam("userDate"))
+			$("#yzh_aboutfooter").html(getParam("schoolName"))
 		})
 
 
 		function fh(){
-			jump("menu1.html");
+			jump("menu2.html");
 		}
 </script>
 </html>

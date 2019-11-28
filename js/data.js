@@ -1,6 +1,5 @@
-var hosturl = "http://pad.chenfengedu.com/nursery";
-hosturl = 'http://47.94.99.209:8068/nursery';
-//var hosturl = "http://localhost:8080/nursery";
+var hosturl = "http://47.94.99.209:8068/nursery";
+
 var ctf = hosturl + "/f";
 
 var errormap = {
@@ -61,6 +60,16 @@ function downloadFiles1(files) {
 		map[id] = obj;
 	}
     var s = window.external.downloadFiles(list);
+    // yzh 2019-11-23
+    $('.fileListItem').each(function(){
+        var filepath = $(this).attr("data-path");
+        var _id = filepath.substring(filepath.lastIndexOf("/") + 1);
+        var _file = window.external.CheckFileHave(_id);
+        if(_file == 1){
+            $(this).find(".downloadtext").show().text('已下载');
+        }
+    })
+    // yzh 2019-11-23
 	if(s != "") {
 		list = [];
 		var ss = s.split(",");
@@ -76,7 +85,6 @@ function downloadFiles1(files) {
 				downloadFiles1(list);
 			})
 	}
-	
 }
 
 //获取文件
@@ -207,6 +215,7 @@ function updateDataByDir1(dir) {
                                     dataMap[datatemp.dirParentId].push(datatemp);
                                 }
                                 dirList = JSON.stringify(dataMap);
+                                
                                 setParam("dirList" + dir, dirList);
                             }
                         }
